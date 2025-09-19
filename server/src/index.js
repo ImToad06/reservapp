@@ -1,9 +1,11 @@
 import express from "express";
+import pool from "./config/db.js";
 
 const app = express();
 
-app.get("/", (req, res) => {
-  res.send("Hello, World!");
+app.get("/", async (req, res) => {
+  const result = await pool.query("SELECT * FROM roles;");
+  res.send(result.rows);
 });
 
 const port = process.env.PORT;
