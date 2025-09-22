@@ -2,6 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "description": "Backend service for reservapp",
+  "type": "module",
   "main": "src/index.js",
   "scripts": {
     "dev": "node --env-file=.env --watch src/index.js"
