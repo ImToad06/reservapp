@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
-import { Eye, EyeOff, User, Lock, Mail, Phone, Building, ArrowRight, Check } from 'lucide-react';
+import React, {useState} from 'react';
+import {Eye, EyeOff, User, Lock, Mail, Calendar, Building, ArrowRight, Check} from 'lucide-react';
+import handleRegister from "../handlers/HandleSignUp.jsx";
 
 export default function Register() {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [formData, setFormData] = useState({
-        restaurantName: '',
+        lastName: '',
         ownerName: '',
         email: '',
-        phone: '',
+        birthdate: '',
         password: '',
         confirmPassword: '',
         acceptTerms: false
@@ -22,10 +23,6 @@ export default function Register() {
         });
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log('Register attempt:', formData);
-    };
 
     return (
         <>
@@ -615,64 +612,63 @@ export default function Register() {
           outline-offset: 2px;
         }
       `}</style>
-
             <main className="register-container">
-                {/* Panel izquierdo con branding */}
+                {/* Left panel with branding */}
                 <div className="register-left">
                     <div className="brand-content">
                         <div className="logo-large">
-                            <Building size={32} />
+                            <Building size={32}/>
                         </div>
-                        <h1 className="brand-title">Únete a ReservApp</h1>
+                        <h1 className="brand-title">Join ReservApp</h1>
                         <p className="brand-subtitle">
-                            Revoluciona la gestión de tu restaurante con nuestra plataforma
-                            integral de reservas y administración de mesas.
+                            Transform your restaurant management with our all-in-one
+                            table reservation and management platform.
                         </p>
 
                         <div className="feature-list">
                             <div className="feature-item">
                                 <div className="feature-icon">🎯</div>
-                                <span>Gestión centralizada de reservas</span>
+                                <span>Centralized reservation management</span>
                             </div>
                             <div className="feature-item">
                                 <div className="feature-icon">📊</div>
-                                <span>Reportes y analytics detallados</span>
+                                <span>Detailed reports & analytics</span>
                             </div>
                             <div className="feature-item">
                                 <div className="feature-icon">🔔</div>
-                                <span>Notificaciones automáticas</span>
+                                <span>Automated notifications</span>
                             </div>
                         </div>
 
                         <div className="benefits-grid">
                             <div className="benefit-item">
                                 <div className="benefit-check">
-                                    <Check size={12} />
+                                    <Check size={12}/>
                                 </div>
-                                <span>30 días gratis</span>
+                                <span>30-day free trial</span>
                             </div>
                             <div className="benefit-item">
                                 <div className="benefit-check">
-                                    <Check size={12} />
+                                    <Check size={12}/>
                                 </div>
-                                <span>Sin permanencia</span>
+                                <span>No commitment</span>
                             </div>
                             <div className="benefit-item">
                                 <div className="benefit-check">
-                                    <Check size={12} />
+                                    <Check size={12}/>
                                 </div>
-                                <span>Soporte 24/7</span>
+                                <span>24/7 support</span>
                             </div>
                             <div className="benefit-item">
                                 <div className="benefit-check">
-                                    <Check size={12} />
+                                    <Check size={12}/>
                                 </div>
-                                <span>Configuración gratuita</span>
+                                <span>Free setup</span>
                             </div>
                         </div>
                     </div>
 
-                    {/* Elementos decorativos */}
+                    {/* Decorative elements */}
                     <div className="floating-elements">
                         <div className="floating-circle circle-1"></div>
                         <div className="floating-circle circle-2"></div>
@@ -680,26 +676,26 @@ export default function Register() {
                     </div>
                 </div>
 
-                {/* Panel derecho con formulario */}
+                {/* Right panel with form */}
                 <div className="register-right">
                     <div className="register-form-container">
                         <div className="form-header">
-                            <h2 className="form-title">Crear Cuenta</h2>
-                            <p className="form-subtitle">Completa la información de tu restaurante</p>
+                            <h2 className="form-title">Create Account</h2>
+                            <p className="form-subtitle">Fill in your restaurant information</p>
                         </div>
 
                         <div className="register-form">
                             <div className="form-row">
                                 <div className="input-group">
-                                    <label className="input-label">Nombre del restaurante</label>
+                                    <label className="input-label">Restaurant Name</label>
                                     <div className="input-wrapper">
-                                        <Building className="input-icon" size={20} />
+                                        <Building className="input-icon" size={20}/>
                                         <input
                                             type="text"
-                                            name="restaurantName"
-                                            placeholder="Mi Restaurante"
+                                            name="lastName"
+                                            placeholder="My Lastname"
                                             className="input-field"
-                                            value={formData.restaurantName}
+                                            value={formData.lastName}
                                             onChange={handleChange}
                                             required
                                         />
@@ -707,13 +703,13 @@ export default function Register() {
                                 </div>
 
                                 <div className="input-group">
-                                    <label className="input-label">Nombre del propietario</label>
+                                    <label className="input-label">Owner Name</label>
                                     <div className="input-wrapper">
-                                        <User className="input-icon" size={20} />
+                                        <User className="input-icon" size={20}/>
                                         <input
                                             type="text"
                                             name="ownerName"
-                                            placeholder="Juan Pérez"
+                                            placeholder="John Smith"
                                             className="input-field"
                                             value={formData.ownerName}
                                             onChange={handleChange}
@@ -724,13 +720,13 @@ export default function Register() {
                             </div>
 
                             <div className="input-group">
-                                <label className="input-label">Correo electrónico</label>
+                                <label className="input-label">Email Address</label>
                                 <div className="input-wrapper">
-                                    <Mail className="input-icon" size={20} />
+                                    <Mail className="input-icon" size={20}/>
                                     <input
                                         type="email"
                                         name="email"
-                                        placeholder="admin@mirestaurante.com"
+                                        placeholder="admin@myrestaurant.com"
                                         className="input-field"
                                         value={formData.email}
                                         onChange={handleChange}
@@ -740,30 +736,29 @@ export default function Register() {
                             </div>
 
                             <div className="input-group">
-                                <label className="input-label">Teléfono</label>
+                                <label className="input-label">Birthdate</label>
                                 <div className="input-wrapper">
-                                    <Phone className="input-icon" size={20} />
                                     <input
-                                        type="tel"
-                                        name="phone"
-                                        placeholder="+57 300 123 4567"
+                                        type="date"
+                                        name="birthdate"
                                         className="input-field"
-                                        value={formData.phone}
+                                        value={formData.birthdate}
                                         onChange={handleChange}
                                         required
                                     />
                                 </div>
                             </div>
 
+
                             <div className="form-row">
                                 <div className="input-group">
-                                    <label className="input-label">Contraseña</label>
+                                    <label className="input-label">Password</label>
                                     <div className="input-wrapper">
-                                        <Lock className="input-icon" size={20} />
+                                        <Lock className="input-icon" size={20}/>
                                         <input
                                             type={showPassword ? "text" : "password"}
                                             name="password"
-                                            placeholder="Mínimo 8 caracteres"
+                                            placeholder="At least 8 characters"
                                             className="input-field"
                                             value={formData.password}
                                             onChange={handleChange}
@@ -774,35 +769,42 @@ export default function Register() {
                                             className="toggle-password"
                                             onClick={() => setShowPassword(!showPassword)}
                                         >
-                                            {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                                            {showPassword ? <EyeOff size={20}/> : <Eye size={20}/>}
                                         </button>
                                     </div>
                                     {formData.password && (
                                         <div className="password-strength">
                                             <div className="strength-bar">
-                                                <div className={`strength-fill ${
-                                                    formData.password.length < 6 ? 'strength-weak' :
-                                                        formData.password.length < 10 ? 'strength-medium' : 'strength-strong'
-                                                }`}></div>
+                                                <div
+                                                    className={`strength-fill ${
+                                                        formData.password.length < 6
+                                                            ? "strength-weak"
+                                                            : formData.password.length < 10
+                                                                ? "strength-medium"
+                                                                : "strength-strong"
+                                                    }`}
+                                                ></div>
                                             </div>
                                             <span>
-                        Seguridad: {
-                                                formData.password.length < 6 ? 'Débil' :
-                                                    formData.password.length < 10 ? 'Media' : 'Fuerte'
-                                            }
-                      </span>
+                  Strength:{" "}
+                                                {formData.password.length < 6
+                                                    ? "Weak"
+                                                    : formData.password.length < 10
+                                                        ? "Medium"
+                                                        : "Strong"}
+                </span>
                                         </div>
                                     )}
                                 </div>
 
                                 <div className="input-group">
-                                    <label className="input-label">Confirmar contraseña</label>
+                                    <label className="input-label">Confirm Password</label>
                                     <div className="input-wrapper">
-                                        <Lock className="input-icon" size={20} />
+                                        <Lock className="input-icon" size={20}/>
                                         <input
                                             type={showConfirmPassword ? "text" : "password"}
                                             name="confirmPassword"
-                                            placeholder="Repite la contraseña"
+                                            placeholder="Repeat password"
                                             className="input-field"
                                             value={formData.confirmPassword}
                                             onChange={handleChange}
@@ -813,7 +815,7 @@ export default function Register() {
                                             className="toggle-password"
                                             onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                                         >
-                                            {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                                            {showConfirmPassword ? <EyeOff size={20}/> : <Eye size={20}/>}
                                         </button>
                                     </div>
                                 </div>
@@ -830,33 +832,47 @@ export default function Register() {
                                         required
                                     />
                                     <span>
-                    Acepto los <a href="#" className="terms-link">Términos y Condiciones</a> y
-                    la <a href="#" className="terms-link">Política de Privacidad</a> de ReservApp
-                  </span>
+              I agree to the{" "}
+                                        <a href="#" className="terms-link">
+                Terms & Conditions
+              </a>{" "}
+                                        and{" "}
+                                        <a href="#" className="terms-link">
+                Privacy Policy
+              </a>{" "}
+                                        of ReservApp
+            </span>
                                 </label>
                             </div>
 
                             <button
-                                type="submit"
+                                type="button"
                                 className="register-button"
-                                disabled={!formData.acceptTerms || formData.password !== formData.confirmPassword}
-                                onClick={handleSubmit}
+                                disabled={
+                                    !formData.acceptTerms ||
+                                    formData.password !== formData.confirmPassword
+                                }
+                                onClick={(e) => handleRegister(e, formData)}
                             >
-                                <span>Crear Cuenta</span>
-                                <ArrowRight size={20} className="button-icon" />
+                                <span>Create Account</span>
+                                <ArrowRight size={20} className="button-icon"/>
                             </button>
 
+
                             <div className="divider">
-                                <span>¿Ya tienes una cuenta?</span>
+                                <span>Already have an account?</span>
                             </div>
 
                             <div className="login-prompt">
-                                <a href="#" className="login-link">Iniciar sesión aquí</a>
+                                <a href="/login" className="login-link">
+                                    Sign in here
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
             </main>
+
         </>
     );
 }
