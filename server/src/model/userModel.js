@@ -76,3 +76,9 @@ export const deleteUserService = async (userId) => {
     [userId],
   );
 };
+
+export const getRoleService = async (role) => {
+  const query = "SELECT * FROM roles where role = $1";
+  const result = await pool.query(query, [role]);
+  return result.rows[0];
+};

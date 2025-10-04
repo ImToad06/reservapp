@@ -2,6 +2,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import {
   createUserService,
+  getRoleService,
   getUserByEmailService,
 } from "../model/userModel.js";
 
@@ -9,13 +10,19 @@ export const register = async (req, res) => {
   try {
     const { name, lastName, birthdate, email, password, role } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
+    const roleData = await getRoleService(role);
+    if (!roleData) {
+      return res.status(400).json({
+        message: "Invalid role",
+      });
+    }
     const result = await createUserService(
       name,
       lastName,
       birthdate,
       email,
       hashedPassword,
-      role,
+      roleData.role_id,
     );
     res.status(201).json({
       message: "User registered succesfully",

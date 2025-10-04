@@ -6,7 +6,7 @@ export const registerSchema = Joi.object({
   birthdate: Joi.date().max("now").required(),
   email: Joi.string().email().required(),
   password: Joi.string().min(8).required(),
-  role: Joi.number(),
+  role: Joi.string().valid("admin", "employee", "user").required(),
 });
 
 export const validateRegister = (req, res, next) => {
