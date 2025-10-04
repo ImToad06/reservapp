@@ -1,19 +1,19 @@
 import pool from "../config/db.js";
 
 export const getAllTablesService = async () => {
-  const query = "SELECT * FROM tables;";
+  const query = "SELECT * FROM tables WHERE status = 'a';";
   const res = await pool.query(query);
   return res.rows;
 };
 
 export const getTableByIdService = async (tableId) => {
-  const query = "SELECT * FROM tables WHERE table_id = $1;";
+  const query = "SELECT * FROM tables WHERE table_id = $1 AND status = 'a';";
   const res = await pool.query(query, [tableId]);
   return res.rows[0];
 };
 
 export const getTableByNumberService = async (tableNumber) => {
-  const query = "SELECT * FROM tables WHERE number = $1;";
+  const query = "SELECT * FROM tables WHERE number = $1 AND status = 'a';";
   const res = await pool.query(query, [tableNumber]);
   return res.rows[0];
 };
