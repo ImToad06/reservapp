@@ -7,7 +7,7 @@ export const genTables = async () => {
   WHERE table_schema = 'public';
   `;
   const res = await pool.query(query);
-  if (res.rows.length < 0) {
+  if (res.rows.length < 1) {
     query = `
     CREATE TABLE "public"."order_products" (
         "order" integer NOT NULL,
