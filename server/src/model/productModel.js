@@ -36,6 +36,18 @@ export const getProductByNameService = async (productName) => {
   return res.rows[0];
 };
 
+export const filterProductsByTypeService = async (type) => {
+  const query = `
+  SELECT
+    p.product_id, p.name, pt.type, p.price, p.status
+  FROM products p
+  JOIN product_types pt ON p.type = pt.product_type_id
+  WHERE p.status = 'a' AND pt.type = $1;
+  `;
+  const res = await pool.query(query, [type]);
+  return res;
+};
+
 export const getTypeService = async (type) => {
   const query = "SELECT * FROM product_types where product_type_id = $1";
   const result = await pool.query(query, [type]);
