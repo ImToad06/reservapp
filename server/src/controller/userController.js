@@ -15,11 +15,9 @@ export const reserve = async (req, res) => {
   const { userId, tableId, date } = req.body;
   const maxDate = new Date();
   maxDate.setDate(maxDate.getDate() + 30);
-
   const { error, value } = reservationSchema.validate(req.body, {
     context: { maxDate },
   });
-
   if (error) {
     return res.status(400).json({
       message: "Date not valid",
@@ -27,12 +25,22 @@ export const reserve = async (req, res) => {
     });
   }
   try {
+    const availableTables = await getAvailableTablesService(date);
+    const isTableAvailable = availableTables.some(
+      (table) => table.table_id === tableId,
+    );
+    if (!isTableAvailable) {
+      return res.status(409).json({
+        message: "Table is not available for the selected date",
+        availableTables: availableTables,
+      });
+    }
     const reserve = await createReserveService(userId, tableId, date);
     const order = await createOrderService(reserve.reserve_id);
     return res.status(201).json({
       message: "Reservation created successfully",
       reserve,
-      order: order.rows[0],
+      order,
     });
   } catch (err) {
     return res.status(500).json({

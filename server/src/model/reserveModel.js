@@ -47,6 +47,20 @@ export const updateReserveService = async (
   return res.rows[0];
 };
 
+export const getAvailableTablesService = async (date) => {
+  const query = `
+    SELECT t.* FROM tables t
+    WHERE t.status = 'a'
+    AND t.table_id NOT IN (
+      SELECT r.table FROM reserves r
+      WHERE r.date = $1 AND r.status = 'a'
+    )
+    ORDER BY t.capacity, t.number;
+  `;
+  const res = await pool.query(query, [date]);
+  return res.rows;
+};
+
 export const deleteReserveService = async (reserveId) => {
   const query = `
     UPDATE reserves SET status = 'i' WHERE reserve_id = $1 RETURNING *;
