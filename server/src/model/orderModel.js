@@ -6,7 +6,7 @@ export const createOrderService = async (reserveId) => {
     RETURNING *;
   `;
   const res = await pool.query(query, [reserveId]);
-  return res;
+  return res.rows[0];
 };
 
 export const getProductsOrderService = async (orderId) => {
@@ -18,7 +18,7 @@ export const getProductsOrderService = async (orderId) => {
     WHERE o.order_id = $1;
   `;
   const res = await pool.query(query, [orderId]);
-  return res;
+  return res.rows;
 };
 
 export const addProductService = async (orderId, productId, amount) => {
@@ -27,7 +27,7 @@ export const addProductService = async (orderId, productId, amount) => {
   VALUES ($1, $2, $3) RETURNING *;
   `;
   const res = await pool.query(query, [orderId, productId, amount]);
-  return res;
+  return res.rows[0];
 };
 
 export const updateProductAmountService = async (
@@ -40,4 +40,5 @@ export const updateProductAmountService = async (
   WHERE orderId = $2 AND productId = $3 RETURNING *;
   `;
   const res = await pool.query(query, [amount, orderId, productId]);
+  return res.rows[0];
 };
