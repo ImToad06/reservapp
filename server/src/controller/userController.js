@@ -1,6 +1,6 @@
 import Joi from "joi";
-import { createReserveService } from "../model/reserveModel";
-import { createOrderService } from "../model/orderModel";
+import { createReserveService } from "../model/reserveModel.js";
+import { createOrderService } from "../model/orderModel.js";
 
 export const reservationSchema = Joi.object({
   userId: Joi.number().required(),

@@ -27,7 +27,7 @@ app.use("/", async () => {
 });
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
-app.use("/api/reserve", reser);
+app.use("/api/reserve", reserveRoutes);
 
 const port = process.env.PORT;
 const startServer = async () => {
