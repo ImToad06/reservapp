@@ -2,6 +2,7 @@ import express from "express";
 import pool from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import reserveRoutes from "./routes/reserveRoutes.js";
 import cors from "cors";
 import { genTables } from "./config/tables.js";
 
@@ -26,7 +27,7 @@ app.use("/", async () => {
 });
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
-app.use("/api/user/reserve", reserveRoutes);
+app.use("/api/reserve", reser);
 
 const port = process.env.PORT;
 const startServer = async () => {
