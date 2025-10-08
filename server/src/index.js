@@ -10,7 +10,7 @@ const app = express();
 // Middleware
 app.use(express.json());
 
-// ✅ Configuración de CORS global
+// Configuración de CORS global
 app.use(
   cors({
     origin: "http://localhost:5173",
@@ -26,6 +26,7 @@ app.use("/", async () => {
 });
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/user/reserve", reserveRoutes);
 
 const port = process.env.PORT;
 const startServer = async () => {
