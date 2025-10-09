@@ -22,24 +22,22 @@ app.use(
 );
 
 // Routes
-app.use("/", async () => {
-  genTables();
-});
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/reserve", reserveRoutes);
 
 const port = process.env.PORT;
-const startServer = async () => {
+const genDb = async () => {
   try {
     await genTables();
     console.log("Database tables initialized");
-    app.listen(port, () => {
-      console.log(`Server is running on localhost:${port}`);
-    });
   } catch (error) {
     console.error("Failed to initialize database:", error);
     process.exit(1);
   }
 };
-startServer();
+genDb();
+
+app.listen(port, () => {
+  console.log(`Server is running on localhost:${port}`);
+});
