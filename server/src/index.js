@@ -1,17 +1,12 @@
 import express from "express";
-import pool from "./config/db.js";
-import authRoutes from "./routes/authRoutes.js";
-import userRoutes from "./routes/userRoutes.js";
-import reserveRoutes from "./routes/reserveRoutes.js";
+import employeeRoutes from "./routes/employeeRoutes.js";
+import tableRoutes from "./routes/tableRoutes.js";
 import cors from "cors";
 import { genTables } from "./config/tables.js";
 
 const app = express();
-
-// Middleware
 app.use(express.json());
 
-// Configuración de CORS global
 app.use(
   cors({
     origin: "http://localhost:5173",
@@ -21,12 +16,10 @@ app.use(
   }),
 );
 
-// Routes
-app.use("/api/auth", authRoutes);
-app.use("/api/users", userRoutes);
-app.use("/api/reserve", reserveRoutes);
+app.use("/api", employeeRoutes);
+app.use("/api", tableRoutes);
 
-const port = process.env.PORT;
+const PORT = process.env.PORT;
 const genDb = async () => {
   try {
     await genTables();
@@ -38,6 +31,6 @@ const genDb = async () => {
 };
 genDb();
 
-app.listen(port, () => {
-  console.log(`Server is running on localhost:${port}`);
+app.listen(PORT, () => {
+  console.log(`Server is running on localhost:${PORT}`);
 });
