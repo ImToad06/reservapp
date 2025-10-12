@@ -13,6 +13,19 @@ export const validateEmployee = (req, res, next) => {
   next();
 };
 
+export const validateEmployeeNoPwd = (req, res, next) => {
+  const schema = Joi.object({
+    name: Joi.string().min(2).max(50).required(),
+    lastName: Joi.string().min(2).max(50).required(),
+    type: Joi.string().valid("admin", "manager").required(),
+    email: Joi.string().email().required(),
+    password: Joi.string().min(8),
+  });
+  const { error } = schema.validate(req.body);
+  if (error) return res.status(400).json({ message: error.details[0].message });
+  next();
+};
+
 export const validateTable = (req, res, next) => {
   const schema = Joi.object({
     capacity: Joi.number().min(2).max(8).required(),

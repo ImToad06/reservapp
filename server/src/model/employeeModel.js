@@ -99,6 +99,30 @@ export const updateEmployeeService = async (
   return result.rows[0];
 };
 
+export const updateEmployeeNoPwdService = async (
+  employeeId,
+  name,
+  lastName,
+  type,
+  email,
+) => {
+  const query = `
+  UPDATE employees
+  SET name = $1, last_name = $2, type = $3, email = $4,
+      status = 'a'
+  WHERE employee_id = $5
+  RETURNING *;
+  `;
+  const result = await pool.query(query, [
+    name,
+    lastName,
+    type,
+    email,
+    employeeId,
+  ]);
+  return result.rows[0];
+};
+
 export const deleteEmployeeService = async (employeeId) => {
   const query = `
   UPDATE employees SET status = 'i' WHERE employee_id = $1 RETURNING *;

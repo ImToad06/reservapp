@@ -1,5 +1,8 @@
 import express from "express";
-import { validateEmployee } from "../middlewares/validationMiddleware.js";
+import {
+  validateEmployee,
+  validateEmployeeNoPwd,
+} from "../middlewares/validationMiddleware.js";
 import {
   deleteEmployee,
   getAllEmployees,
@@ -9,6 +12,7 @@ import {
   loginEmployee,
   registerEmployee,
   updateEmployee,
+  updateEmployeeNoPwd,
 } from "../controller/employeeController.js";
 import { verifyToken } from "../middlewares/authMiddleware.js";
 import { authorizeRoles } from "../middlewares/roleMiddleware.js";
@@ -22,6 +26,7 @@ router.get("/employee/:id", getEmployeeById);
 router.get("/employee/email/:email", getEmployeeByEmail);
 router.get("/employee/type/:type", getEmployeeByType);
 router.put("/employee/:id", validateEmployee, updateEmployee);
+router.patch("/employee/patch/:id", validateEmployeeNoPwd, updateEmployeeNoPwd);
 router.delete("/employee/:id", deleteEmployee);
 router.get(
   "/employee/admin",
