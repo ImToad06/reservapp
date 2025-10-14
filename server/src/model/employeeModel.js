@@ -62,7 +62,7 @@ export const readEmployeeByTypeService = async (type) => {
   WHERE e.status = 'a' AND t.type = $1;
   `;
   const result = await pool.query(query, [type]);
-  return result.rows[0];
+  return result.rows;
 };
 
 export const readEmployeeTypeService = async (type) => {

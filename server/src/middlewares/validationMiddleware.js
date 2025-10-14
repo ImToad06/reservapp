@@ -19,7 +19,6 @@ export const validateEmployeeNoPwd = (req, res, next) => {
     lastName: Joi.string().min(2).max(50).required(),
     type: Joi.string().valid("admin", "manager").required(),
     email: Joi.string().email().required(),
-    password: Joi.string().min(8),
   });
   const { error } = schema.validate(req.body);
   if (error) return res.status(400).json({ message: error.details[0].message });

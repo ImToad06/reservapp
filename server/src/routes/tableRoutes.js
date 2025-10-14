@@ -1,23 +1,21 @@
 import express from "express";
 import {
+  createTable,
+  deleteTable,
   getAllTables,
   getAvaliableTables,
   getTableById,
+  updateTable,
 } from "../controller/tableController.js";
 import { validateTable } from "../middlewares/validationMiddleware.js";
-import {
-  createTableService,
-  deleteTableService,
-  updateTableService,
-} from "../model/tableModel.js";
 
 const router = express.Router();
 
 router.get("/table", getAllTables);
-router.post("/table", validateTable, createTableService);
+router.post("/table", validateTable, createTable);
 router.get("/table/:id", getTableById);
 router.get("/table/date/:date", getAvaliableTables);
-router.put("/table/:id", validateTable, updateTableService);
-router.delete("/table/:id", deleteTableService);
+router.put("/table/:id", validateTable, updateTable);
+router.delete("/table/:id", deleteTable);
 
 export default router;

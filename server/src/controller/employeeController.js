@@ -8,6 +8,7 @@ import {
   readEmployeeByIdService,
   readEmployeeByTypeService,
   readEmployeeTypeService,
+  updateEmployeeNoPwdService,
   updateEmployeeService,
 } from "../model/employeeModel.js";
 
@@ -93,7 +94,7 @@ export const updateEmployeeNoPwd = async (req, res) => {
   const { id } = req.params;
   const { name, lastName, type, email } = req.body;
   const typeData = await readEmployeeTypeService(type);
-  const employee = await updateEmployeeService(
+  const employee = await updateEmployeeNoPwdService(
     id,
     name,
     lastName,
@@ -108,7 +109,7 @@ export const updateEmployeeNoPwd = async (req, res) => {
 
 export const deleteEmployee = async (req, res) => {
   const { id } = req.params;
-  const employee = deleteEmployeeService(id);
+  const employee = await deleteEmployeeService(id);
   res.status(200).json({
     message: "User deleted successfully",
     employee,

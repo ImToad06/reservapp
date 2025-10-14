@@ -31,8 +31,9 @@ export const createTable = async (req, res) => {
 };
 
 export const updateTable = async (req, res) => {
+  const { id } = req.params;
   const { capacity } = req.body;
-  const table = await updateTableService(capacity);
+  const table = await updateTableService(id, capacity);
   res.status(200).json({ message: "Table updated successfully", table });
 };
 
