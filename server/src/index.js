@@ -1,6 +1,7 @@
 import express from "express";
 import employeeRoutes from "./routes/employeeRoutes.js";
 import tableRoutes from "./routes/tableRoutes.js";
+import reserveRoutes from "./routes/reserveRoutes.js";
 import cors from "cors";
 import { genTables } from "./config/tables.js";
 
@@ -18,6 +19,7 @@ app.use(
 
 app.use("/api", employeeRoutes);
 app.use("/api", tableRoutes);
+app.use("/api", reserveRoutes);
 
 const PORT = process.env.PORT;
 const genDb = async () => {

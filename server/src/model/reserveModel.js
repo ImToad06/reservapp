@@ -8,7 +8,7 @@ export const createReserveService = async (
   date,
 ) => {
   const query = `
-    INSERT INTO reserves (name, last_name, persons, table, date, status)
+    INSERT INTO reserves (name, last_name, persons, "table", date, status)
     VALUES ($1, $2, $3, $4, $5, 'a')
     RETURNING *;
   `;

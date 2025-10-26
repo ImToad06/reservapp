@@ -2,9 +2,10 @@ import {
   createReserveService,
   deleteReserveService,
   getAllReservesService,
+  getReserveByIdService,
   getReserveByUserService,
   updateReserveService,
-} from "../model/reserveModel";
+} from "../model/reserveModel.js";
 
 export const getAllReserves = async (req, res) => {
   const reserves = await getAllReservesService();
@@ -13,7 +14,7 @@ export const getAllReserves = async (req, res) => {
 
 export const getReserveById = async (req, res) => {
   const { id } = req.params;
-  const reserve = await getReserveByIdServicey(id);
+  const reserve = await getReserveByIdService(id);
   res.status(200).json({ reserve });
 };
 

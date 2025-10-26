@@ -13,7 +13,8 @@ import { validateReserve } from "../middlewares/validationMiddleware.js";
 const router = express.Router();
 
 router.get("/reserve", getAllReserves);
-router.post("/reserve", validateReserve, createReserve);
+router.post("/reserve", createReserve);
+// router.post("/reserve", validateReserve, createReserve);
 router.get("/reserve/:id", getReserveById);
 router.get("reserve/user/:user", getReserveByUser);
 router.get("reserve/date/:date", getReserveByDate);
