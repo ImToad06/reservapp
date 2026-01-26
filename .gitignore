@@ -1,4 +1,1 @@
-server/package-lock.json
-server/node_modules/
-server/.env
-.idea/
+planning.md
